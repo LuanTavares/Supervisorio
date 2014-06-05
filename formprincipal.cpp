@@ -1,13 +1,9 @@
 #include "formprincipal.h"
 #include <QPainter>
-<<<<<<< HEAD
 #include <iostream>
 
 FormPrincipal::FormPrincipal(QSerialPortInfo port)
-=======
 
-FormPrincipal::FormPrincipal(QSerialPort *port)
->>>>>>> 01105cfe5582c578cf763d9555d103b739c31d21
 {
 
     QString filename = ":/new/img/usina-eolica-turbina-eolica-energia-eolica_yubqha.jpg";
@@ -22,7 +18,6 @@ FormPrincipal::FormPrincipal(QSerialPort *port)
     this->rtTemperatura = 0;
     this->rtTensao      = 0;
 
-<<<<<<< HEAD
     portaSelecionada.setPort(port);
 
     while(portaSelecionada.open(QIODevice::ReadWrite)) {
@@ -33,11 +28,7 @@ FormPrincipal::FormPrincipal(QSerialPort *port)
 
         }
     }
-=======
 
-
-
->>>>>>> 01105cfe5582c578cf763d9555d103b739c31d21
     update();
 
 
