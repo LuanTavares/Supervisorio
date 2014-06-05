@@ -5,10 +5,13 @@
 FormPrincipal::FormPrincipal(QSerialPortInfo port)
 
 {
-
     QString filename = ":/new/img/usina-eolica-turbina-eolica-energia-eolica_yubqha.jpg";
 
-    image = new QImage(filename);
+    this->image = new QImage(filename);
+    this->formTemperatura = new temperatura();
+    this->formPotencia = new potencia();
+    this->formRotacao = new rotacao();
+    this->formTensao = new tensao();
 
     this->setFixedHeight(image->height());
     this->setFixedWidth(image->width());
@@ -18,20 +21,14 @@ FormPrincipal::FormPrincipal(QSerialPortInfo port)
     this->rtTemperatura = 0;
     this->rtTensao      = 0;
 
+    this->atualizaSensores = new QTimer();
+    atualizaSensores->start(500);
+
     portaSelecionada.setPort(port);
 
-    while(portaSelecionada.open(QIODevice::ReadWrite)) {
-
-        QByteArray dados = portaSelecionada.read(10);
-        QString str(dados.data());
-        if(str == "StringTemperatura") {
-
-        }
-    }
-
+    connect(this,SIGNAL(atualizaTemperatura(double,double)),formTemperatura,SLOT(atualizaGrafico(double,double)));
+    connect(atualizaSensores,SIGNAL(timeout()),this,SLOT(leDados()));
     update();
-
-
 }
 
 FormPrincipal ::~FormPrincipal(){
@@ -152,24 +149,30 @@ void FormPrincipal::mousePressEvent(QMouseEvent *e){
     int x = e->localPos().x();
     int y = e->localPos().y();
 
-    if(ehTemperatura(x,y)){
-        this->formTemperatura = new temperatura();
+    if(ehTemperatura(x,y)){    
         formTemperatura->show();
     }else if(ehPotencia(x,y)){
-        this->formPotencia = new potencia();
         formPotencia->show();
     }else if(ehRotacao(x,y)){
-        this->formRotacao = new rotacao();
         formRotacao->show();
     }else if(ehTensao(x,y)){
-        this->formTensao = new tensao();
         formTensao->show();
     }
 }
 
-void leTemperatura(){
-    //Emitir aqui a temperatura lida pela serial
-    //emit temperaturaSerial(2);
+void FormPrincipal::leDados(){
+    if(portaSelecionada.open(QIODevice::ReadWrite)) {
+        QByteArray dados = portaSelecionada.read(10);
+        QString str(dados.data());
+        str = "teste";
+        if(str == "teste") {
+            // converte string para temperatura e atualiza tudo que é preciso
+            temperaturaLida++;
+            emit atualizaTemperatura(temperaturaLida,1.0);
+        }
+        update();
+        portaSelecionada.close();
+    }
 }
 
 

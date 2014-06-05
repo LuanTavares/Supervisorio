@@ -50,11 +50,22 @@ temperatura::temperatura(QWidget *parent) :
 }
 
 void temperatura::atualizaGrafico(double x,double y) {
+    if(x > maiorTemperatura)
+        maiorTemperatura = x;
+
+    if(yAxis.isEmpty())
+        yAxis << y;
+    else
+        yAxis << (y+(yAxis.last()));
     xAxis << x;
-    yAxis << y;
+
+
+
     customPlot->graph(0)->setData(xAxis, yAxis);
     customPlot->yAxis->setLabel("Temperatura");
-    customPlot->yAxis->setRange(0, 2);
+    customPlot->yAxis->setRange(0, maiorTemperatura);
+    customPlot->xAxis->setRange(0,yAxis.last());
+    customPlot->xAxis->setLabel("Tempo");
     customPlot->replot();
 }
 

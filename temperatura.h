@@ -28,7 +28,9 @@ public:
     QVector <double> xAxis;
     QVector <double> yAxis;
 
-    
+private:
+    double maiorTemperatura;
+
 signals:
     
 public slots:

@@ -8,17 +8,17 @@ potencia::potencia(QWidget *parent) :
     this->setFrameStyle(QFrame::Box);
     this->setWindowTitle("Leitura Da Potência");
 
-    this->lVLayout              = new QVBoxLayout();
-    this->lHLayout              = new QHBoxLayout();
-    this->customPlot            = new QCustomPlot();
-    this->lbHead                = new QLabel();
-    this->lbSesorAtual          = new QLabel();
-    this->lbSesoresDisponiveis  = new QLabel();
-    this->edSensorAtual         = new QLCDNumber();
+    this->lVLayout = new QVBoxLayout();
+    this->lHLayout = new QHBoxLayout();
+    this->customPlot = new QCustomPlot();
+    this->lbHead = new QLabel();
+    this->lbSesorAtual = new QLabel();
+    this->lbSesoresDisponiveis = new QLabel();
+    this->edSensorAtual = new QLCDNumber();
     this->edSensoresDisponiveis = new QLCDNumber();
-    this->btDesligarSensor           = new QPushButton();
+    //this->btDesligarSensor = new QPushButton();
 
-    connect(btDesligarSensor, SIGNAL(clicked()),this,SLOT(atualizaValores()));
+    //connect(btDesligarSensor, SIGNAL(clicked()),this,SLOT(atualizaValores()));
 
     this->edSensorAtual->setDigitCount(1);
     this->edSensorAtual->setFixedWidth(30);
@@ -32,12 +32,12 @@ potencia::potencia(QWidget *parent) :
     this->lbHead->setText("Informações:");
     this->lbSesorAtual->setText("Sensor \nAtual:");
     this->lbSesoresDisponiveis->setText("Sensores \nDisponíveis");
-    this->btDesligarSensor->setText("Atualizar");
-    this->btDesligarSensor->setFixedWidth(50);
+    //this->btDesligarSensor->setText("Atualizar");
+    //this->btDesligarSensor->setFixedWidth(50);
     this->customPlot->addGraph();
 
     this->lVLayout->addWidget(lbHead);
-    this->lVLayout->addWidget(btDesligarSensor);
+    //this->lVLayout->addWidget(btDesligarSensor);
     this->lVLayout->addWidget(lbSesorAtual);
     this->lVLayout->addWidget(edSensorAtual);
     this->lVLayout->addWidget(lbSesoresDisponiveis);
