@@ -13,6 +13,7 @@ class potencia : public QFrame
     Q_OBJECT
 public:
     potencia(QWidget *parent = 0);
+    ~potencia();
     QCustomPlot *customPlot;
     QLabel * lbHead;
     QLabel * lbSesoresDisponiveis;
@@ -28,7 +29,8 @@ public:
     QVector <double> xAxis;
     QVector <double> yAxis;
     //FormPrincipal form;
-
+private:
+    double maiorPotencia;
 
 signals:
 

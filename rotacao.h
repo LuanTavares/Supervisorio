@@ -13,6 +13,7 @@ class rotacao : public QFrame
     Q_OBJECT
 public:
     rotacao(QWidget *parent = 0);
+    ~rotacao();
     QCustomPlot *customPlot;
     QLabel * lbHead;
     QLabel * lbSesoresDisponiveis;
@@ -29,6 +30,8 @@ public:
     QVector <double> yAxis;
     //FormPrincipal form;
 
+private:
+    double maiorRotacao;
 
 signals:
 

@@ -34,11 +34,14 @@ class FormPrincipal :public QMainWindow
     void mousePressEvent(QMouseEvent *e);
 
 private:
-    double temperaturaLida;
     QTimer * atualizaSensores;
+    QTimer * atualizaTela;
 
 signals:
     void atualizaTemperatura(double x, double y);
+    void atualizaPotencia(double x, double y);
+    void atualizaRotacao(double x, double y);
+    void atualizaTensao(double x, double y);
 
 public slots:
     void leDados();

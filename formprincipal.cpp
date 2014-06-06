@@ -22,11 +22,15 @@ FormPrincipal::FormPrincipal(QSerialPortInfo port)
     this->rtTensao      = 0;
 
     this->atualizaSensores = new QTimer();
-    atualizaSensores->start(500);
+    atualizaSensores->start(800);
+    this->atualizaTela = new QTimer();
 
     portaSelecionada.setPort(port);
 
     connect(this,SIGNAL(atualizaTemperatura(double,double)),formTemperatura,SLOT(atualizaGrafico(double,double)));
+    connect(this,SIGNAL(atualizaTensao(double,double)),formTensao,SLOT(atualizaGrafico(double,double)));
+    connect(this,SIGNAL(atualizaRotacao(double,double)),formRotacao,SLOT(atualizaGrafico(double,double)));
+    connect(this,SIGNAL(atualizaPotencia(double,double)),formPotencia,SLOT(atualizaGrafico(double,double)));
     connect(atualizaSensores,SIGNAL(timeout()),this,SLOT(leDados()));
     update();
 }
@@ -167,8 +171,8 @@ void FormPrincipal::leDados(){
         str = "teste";
         if(str == "teste") {
             // converte string para temperatura e atualiza tudo que é preciso
-            temperaturaLida++;
-            emit atualizaTemperatura(temperaturaLida,1.0);
+            rtTemperatura++;
+            emit atualizaTemperatura(rtTemperatura,1.0);
         }
         update();
         portaSelecionada.close();

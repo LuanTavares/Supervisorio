@@ -13,6 +13,7 @@ class temperatura : public QFrame
     Q_OBJECT
 public:
     temperatura(QWidget *parent = 0);
+    ~temperatura();
     QCustomPlot *customPlot;
     QLabel * lbHead;
     QLabel * lbSesoresDisponiveis;

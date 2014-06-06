@@ -51,15 +51,31 @@ potencia::potencia(QWidget *parent) :
 }
 
 void potencia::atualizaGrafico(double x,double y) {
+    if(x > maiorPotencia)
+        maiorPotencia = x;
+
+    if(yAxis.isEmpty())
+        yAxis << y;
+    else
+        yAxis << (y+(yAxis.last()));
     xAxis << x;
-    yAxis << y;
+
+
+
     customPlot->graph(0)->setData(xAxis, yAxis);
     customPlot->yAxis->setLabel("Potência");
-    customPlot->yAxis->setRange(0, 2);
+    customPlot->yAxis->setRange(0, maiorPotencia);
+    customPlot->xAxis->setRange(0,yAxis.last());
+    customPlot->xAxis->setLabel("Tempo (s)");
     customPlot->replot();
 }
 
 void potencia::atualizaValores(){
     this->edSensorAtual->display(1);
     this->edSensoresDisponiveis->display(1);
+}
+
+potencia::~potencia(){
+    xAxis.clear();
+    yAxis.clear();
 }

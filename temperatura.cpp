@@ -65,11 +65,16 @@ void temperatura::atualizaGrafico(double x,double y) {
     customPlot->yAxis->setLabel("Temperatura");
     customPlot->yAxis->setRange(0, maiorTemperatura);
     customPlot->xAxis->setRange(0,yAxis.last());
-    customPlot->xAxis->setLabel("Tempo");
+    customPlot->xAxis->setLabel("Tempo (s)");
     customPlot->replot();
 }
 
 void temperatura::atualizaValores(){
     this->edSensorAtual->display(1);
     this->edSensoresDisponiveis->display(1);
+}
+
+temperatura::~temperatura() {
+    yAxis.clear();
+    xAxis.clear();
 }

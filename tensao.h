@@ -13,6 +13,7 @@ class tensao : public QFrame
     Q_OBJECT
 public:
     tensao(QWidget *parent = 0);
+    ~tensao();
     QCustomPlot *customPlot;
     QLabel * lbHead;
     QLabel * lbSesoresDisponiveis;
@@ -29,6 +30,8 @@ public:
     QVector <double> yAxis;
     //FormPrincipal form;
 
+private:
+    double maiorTensao;
 
 signals:
 

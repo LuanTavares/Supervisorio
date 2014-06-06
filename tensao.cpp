@@ -46,15 +46,31 @@ tensao::tensao(QWidget *parent) :
 }
 
 void tensao::atualizaGrafico(double x,double y) {
+    if(x > maiorTensao)
+        maiorTensao= x;
+
+    if(yAxis.isEmpty())
+        yAxis << y;
+    else
+        yAxis << (y+(yAxis.last()));
     xAxis << x;
-    yAxis << y;
+
+
+
     customPlot->graph(0)->setData(xAxis, yAxis);
-    customPlot->yAxis->setLabel("Tensão");
-    customPlot->yAxis->setRange(0, 2);
+    customPlot->yAxis->setLabel("Tensão ");
+    customPlot->yAxis->setRange(0, maiorTensao);
+    customPlot->xAxis->setRange(0,yAxis.last());
+    customPlot->xAxis->setLabel("Tempo (s)");
     customPlot->replot();
 }
 
 void tensao::atualizaValores(){
     this->edSensorAtual->display(1);
     this->edSensoresDisponiveis->display(1);
+}
+
+tensao::~tensao(){
+    yAxis.clear();
+    xAxis.clear();
 }
