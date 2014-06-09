@@ -4,6 +4,7 @@ Tela::Tela() {
     portasDisponiveis = new QComboBox();
     portas = new Serial();
     QList <QString> dialog = portas->listaPortas();
+    dialog.push_front("");
     for(int i = 0; i < dialog.size(); i++) {
         portasDisponiveis->addItem(dialog.at(i));
     }

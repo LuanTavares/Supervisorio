@@ -27,6 +27,8 @@ void Serial::selecionaPorta(int porta) {
         principal = new FormPrincipal(listaDePortasSeriais.at(porta));
         mostraTela = true;
         principal->show();
+    } else {
+        std::cout << "Não foi possível abrir a porta "<< listaDePortas.at(porta).data() << std::endl;
     }
 }
 

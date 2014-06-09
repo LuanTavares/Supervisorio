@@ -168,11 +168,22 @@ void FormPrincipal::leDados(){
     if(portaSelecionada.open(QIODevice::ReadWrite)) {
         QByteArray dados = portaSelecionada.read(10);
         QString str(dados.data());
-        str = "teste";
-        if(str == "teste") {
-            // converte string para temperatura e atualiza tudo que é preciso
+
+        if(str == "String da Temperatura") {
             rtTemperatura++;
             emit atualizaTemperatura(rtTemperatura,1.0);
+        }
+        if(str == "String da Tensão") {
+            rtTensao++;
+            emit atualizaTensao(rtTensao,1.0);
+        }
+        if(str == "String da Potencia") {
+            rtPotencia++;
+            emit atualizaPotencia(rtPotencia,1.0);
+        }
+        if(str == "String da Rotação") {
+            rtRotacao++;
+            emit atualizaRotacao(rtRotacao,1.0);
         }
         update();
         portaSelecionada.close();
